@@ -207,7 +207,7 @@ dc.coordinateGridChart = function (_chart) {
 
     function prepareYAxis(g) {
         if (_y == null || _chart.elasticY()) {
-            _y = d3.scale.linear();
+            _y = _y || d3.scale.linear();
             _y.domain([_chart.yAxisMin(), _chart.yAxisMax()]).rangeRound([_chart.yAxisHeight(), 0]);
         }
 
