@@ -793,6 +793,8 @@ dc.marginable = function (_chart) {
     var _xAxisPadding = 0;
     var _xElasticity = false;
 
+    var _axisPixelPadding = { left: 0, top: 0, right: 0, bottom: 0 };
+
     var _y;
     var _yAxis = d3.svg.axis();
     var _yAxisPadding = 0;
@@ -908,7 +910,7 @@ dc.marginable = function (_chart) {
         if (_chart.isOrdinal()) {
             _chart.prepareOrdinalXAxis();
         } else {
-            _x.range([0, _chart.xAxisLength()]);
+            _x.range([0 + _axisPixelPadding.left, _chart.xAxisLength() - _axisPixelPadding.right]);
         }
 
         _xAxis = _xAxis.scale(_chart.x()).orient("bottom");
@@ -987,7 +989,7 @@ dc.marginable = function (_chart) {
             _y.domain([_chart.yAxisMin(), _chart.yAxisMax()]).rangeRound([_chart.yAxisHeight(), 0]);
         }
 
-        _y.range([_chart.yAxisHeight(), 0]);
+        _y.range([_chart.yAxisHeight() - _axisPixelPadding.bottom, 0 + _axisPixelPadding.top]);
         _yAxis = _yAxis.scale(_y).orient("left").ticks(DEFAULT_Y_AXIS_TICKS);
 
         renderHorizontalGridLines(g);
@@ -1081,6 +1083,12 @@ dc.marginable = function (_chart) {
         if (!arguments.length) return _renderVerticalGridLine;
         _renderVerticalGridLine = _;
         return _chart;
+    };
+
+    _chart.axisPixelPadding = function (_) {
+      if (!arguments.length) return _axisPixelPadding;
+      _axisPixelPadding = _;
+      return _chart;
     };
 
     _chart.xAxisMin = function () {
