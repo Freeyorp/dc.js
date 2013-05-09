@@ -1457,7 +1457,7 @@ dc.singleSelectionChart = function(_chart) {
             _filter = f?f:_filter;
         }
 
-        if (_) {
+        if (_chart.hasFilter()) {
             _chart.turnOnControls();
         } else {
             _chart.turnOffControls();
