@@ -11,6 +11,8 @@ dc.pieChart = function(parent, chartGroup) {
 
     var _chart = dc.singleSelectionChart(dc.colorChart(dc.baseChart({})));
 
+    var _sortf = null;
+
     _chart.label(function(d) {
         return _chart.keyAccessor()(d.data);
     });
@@ -220,6 +222,12 @@ dc.pieChart = function(parent, chartGroup) {
         return _chart;
     };
 
+    _chart.sort = function(f) {
+        if (!arguments.length) return _sortf;
+        _sortf = f;
+        return _chart;
+    }
+
     _chart.cx = function() {
         return _chart.width() / 2;
     };
@@ -248,7 +256,7 @@ dc.pieChart = function(parent, chartGroup) {
     };
 
     function calculateDataPie() {
-        return d3.layout.pie().sort(null).value(function(d) {
+        return d3.layout.pie().sort(_sortf).value(function(d) {
             return _chart.valueAccessor()(d);
         });
     }
