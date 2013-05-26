@@ -19,7 +19,7 @@ dc.bubbleChart = function(parent, chartGroup) {
         if (_elasticRadius)
             _chart.r().domain([_chart.rMin(), _chart.rMax()]);
 
-        _chart.r().range([_chart.MIN_RADIUS, _chart.xAxisLength() * _chart.maxBubbleRelativeSize()]);
+        _chart.r().range([_chart.MIN_RADIUS, Math.min(_chart.yAxisHeight(), _chart.xAxisLength()) * _chart.maxBubbleRelativeSize()]);
 
         var bubbleG = _chart.chartBodyG().selectAll("g." + _chart.BUBBLE_NODE_CLASS)
             .data(_chart.group().all());

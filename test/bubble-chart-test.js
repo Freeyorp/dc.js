@@ -156,9 +156,9 @@ suite.addBatch({
             'should calculate right r for each bubble': function(chart) {
                 chart.selectAll("circle.bubble").each(function(d, i) {
                     if (i == 0)
-                        assert.equal(d3.select(this).attr("r"), 49.33333333333333);
+                        assert.equal(d3.select(this).attr("r"), 23.833333333333333);
                     if (i == 1)
-                        assert.equal(d3.select(this).attr("r"), 49.33333333333333);
+                        assert.equal(d3.select(this).attr("r"), 23.833333333333333);
                 });
             },
             'should attach each bubble with index based class': function(chart) {
